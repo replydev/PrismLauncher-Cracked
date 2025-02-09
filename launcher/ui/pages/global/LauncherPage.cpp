@@ -217,9 +217,6 @@ void LauncherPage::applySettings()
     s->set("RequestTimeout", ui->timeoutSecondsSpinBox->value());
 
     // Console settings
-    s->set("ShowConsole", ui->showConsoleCheck->isChecked());
-    s->set("AutoCloseConsole", ui->autoCloseConsoleCheck->isChecked());
-    s->set("ShowConsoleOnError", ui->showConsoleErrorCheck->isChecked());
     QString consoleFontFamily = ui->consoleFont->currentFont().family();
     s->set("ConsoleFont", consoleFontFamily);
     s->set("ConsoleFontSize", ui->fontSizeBox->value());
@@ -235,6 +232,7 @@ void LauncherPage::applySettings()
     s->set("SkinsDir", ui->skinsDirTextBox->text());
     s->set("JavaDir", ui->javaDirTextBox->text());
     s->set("DownloadsDirWatchRecursive", ui->downloadsDirWatchRecursiveCheckBox->isChecked());
+    s->set("MoveModsFromDownloadsDir", ui->downloadsDirMoveCheckBox->isChecked());
 
     auto sortMode = (InstSortMode)ui->sortingModeGroup->checkedId();
     switch (sortMode) {
@@ -277,9 +275,6 @@ void LauncherPage::loadSettings()
     ui->timeoutSecondsSpinBox->setValue(s->get("RequestTimeout").toInt());
 
     // Console settings
-    ui->showConsoleCheck->setChecked(s->get("ShowConsole").toBool());
-    ui->autoCloseConsoleCheck->setChecked(s->get("AutoCloseConsole").toBool());
-    ui->showConsoleErrorCheck->setChecked(s->get("ShowConsoleOnError").toBool());
     QString fontFamily = APPLICATION->settings()->get("ConsoleFont").toString();
     QFont consoleFont(fontFamily);
     ui->consoleFont->setCurrentFont(consoleFont);
@@ -302,6 +297,7 @@ void LauncherPage::loadSettings()
     ui->skinsDirTextBox->setText(s->get("SkinsDir").toString());
     ui->javaDirTextBox->setText(s->get("JavaDir").toString());
     ui->downloadsDirWatchRecursiveCheckBox->setChecked(s->get("DownloadsDirWatchRecursive").toBool());
+    ui->downloadsDirMoveCheckBox->setChecked(s->get("MoveModsFromDownloadsDir").toBool());
 
     QString sortMode = s->get("InstSortMode").toString();
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
  *  Prism Launcher - Minecraft Launcher
- *  Copyright (C) 2023 TheKodeToad <TheKodeToad@proton.me>
+ *  Copyright (c) 2023 Trial97 <alexandru.tripon97@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,25 +18,12 @@
 
 #pragma once
 
-#include <Application.h>
-
 #include "ui/pages/BasePage.h"
-#include "ui/widgets/EnvironmentVariables.h"
 
-class EnvironmentVariablesPage : public QWidget, public BasePage {
-    Q_OBJECT
-
+class ModpackProviderBasePage : public BasePage {
    public:
-    explicit EnvironmentVariablesPage(QWidget* parent = nullptr);
-
-    QString displayName() const override;
-    QIcon icon() const override;
-    QString id() const override;
-    QString helpPage() const override;
-
-    bool apply() override;
-    void retranslate() override;
-
-   private:
-    EnvironmentVariables* variables;
+    /** Programatically set the term in the search bar. */
+    virtual void setSearchTerm(QString) = 0;
+    /** Get the current term in the search bar. */
+    [[nodiscard]] virtual QString getSerachTerm() const = 0;
 };
